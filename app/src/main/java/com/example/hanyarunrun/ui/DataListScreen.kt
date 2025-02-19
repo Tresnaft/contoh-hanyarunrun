@@ -79,6 +79,18 @@ fun DataListScreen(navController: NavHostController, viewModel: DataViewModel) {
                             ) {
                                 Text(text = "Edit")
                             }
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Button(
+                                onClick = {
+                                    viewModel.deleteData(item)
+                                },
+                                shape = RoundedCornerShape(8.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.error
+                                )
+                            ) {
+                                Text(text = "Delete", color = MaterialTheme.colorScheme.onError)
+                            }
                         }
                     }
                 }

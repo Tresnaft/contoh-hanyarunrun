@@ -20,4 +20,7 @@ interface DataDao {
 
     @Delete
     suspend fun delete(data: DataEntity)
+
+    @Query("SELECT COUNT(*) FROM data_table") // Gantilah 'data_table' dengan nama tabel yang sesuai
+    fun getTotalData(): LiveData<Int>
 }

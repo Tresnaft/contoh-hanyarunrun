@@ -13,6 +13,11 @@ import kotlinx.coroutines.withContext
 class DataViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = AppDatabase.getDatabase(application).dataDao()
     val dataList: LiveData<List<DataEntity>> = dao.getAll()
+    var totaldata: LiveData<Int> = dao.getTotalData()
+
+    fun getTotalData(): LiveData<Int>{
+        return totaldata
+    }
 
     fun insertData(
         kodeProvinsi: String,
@@ -49,6 +54,12 @@ class DataViewModel(application: Application) : AndroidViewModel(application) {
     suspend fun getDataById(id: Int): DataEntity? {
         return withContext(Dispatchers.IO) {
             dao.getById(id)
+        }
+    }
+
+    fun deleteData(data: DataEntity){
+        viewModelScope.launch{
+            dao.delete(data)
         }
     }
 }
